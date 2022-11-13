@@ -1,0 +1,46 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  background-color: cadetblue;
+}
+.descr__one {
+}
+.descr__one_box {
+  display: flex;
+  /* включает отсутупы  и минус scroll 15px*/
+  box-sizing: border-box;
+  width: 400px;
+  height: 350px;
+  overflow: scroll;
+  margin-top: 50px;
+  padding: 10px;
+  background-color: thistle;
+  color: white;
+  display: block;
+}
+.descr__two_box {
+  display: flex;
+  width: 400px;
+  height: 350px;
+  overflow: scroll;
+  margin-top: 50px;
+  padding: 10px;
+  background-color: bisque;
+}
+.btn_one {
+  width: 100px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: brown;
+}
+
+.btn_two {
+  width: 100px;
+  height: 40px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+  background-color: brown;
+}

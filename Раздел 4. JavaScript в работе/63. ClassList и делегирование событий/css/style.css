@@ -1,0 +1,34 @@
+.btn-block {
+  height: 60px;
+  padding-top: 16px;
+  padding-left: 10px;
+  background-color: gray;
+}
+.blue {
+  background-color: blue;
+  height: 40px;
+  width: 100px;
+}
+.some {
+}
+.red {
+  background-color: red;
+}
+.orange {
+  background-color: orange;
+}
+.dark {
+  background-color: dark;
+  height: 80px;
+  width: 80px;
+}
+.white {
+  background-color: white;
+  height: 80px;
+  width: 80px;
+}
+button {
+  background-color: yellow;
+  height: 40px;
+  width: 100px;
+}
