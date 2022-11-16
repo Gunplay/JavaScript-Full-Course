@@ -21,9 +21,11 @@
 //                                              Методы которые относяться к строкам
 // search - метод который ищем только первое совпадение и флаг "g" - не работает с ним
 // text.innerHTML = ans.search(reg);
+
 // match - работает с "g", более мощный инструмент
 // console.log(ans.match(reg));
-
+// const ans = prompt('Введите ваше имя', '');
+// console.log(ans.match(reg))  //вы воводи все совпадения в массив
 
 //                                                          Метод replace
 
@@ -36,10 +38,40 @@
 // console.log(pass.replace(/\&/g, '*'));
 
 // console.log('12-34-56'.replace(/-/g, ':'));
-
+// const manes = 'Kirill, Vova, Anton, Vova, Vova, Nastya, Nastya, Kirill';
+// console.log(manes.replace(/Nastya/ig, '*'));
+// console.log(manes.replace(/,/ig, '-'));
 //                                                          Метод test (true, false)
 
-const ans = prompt('Введите ваше имя', '');
+// const ans = prompt('Введите ваше имя', '');
 
-const reg = /n/ig;
-console.log(reg.test(ans));
+// const reg = /n/ig;
+// console.log(reg.test(ans));
+
+// const ans = prompt('Только число', '');
+                                                            // Классы
+                                                            // \d - digits - Цифры
+                                                            // \w - слова, все буквы
+                                                            // \s - пробелы
+
+// const reg = /\d/g;
+
+// console.log(ans.match(reg));
+// const numbers = ans.match(reg);
+// console.log(numbers.join(', '));
+
+// const str = 'My name is R2D2';
+// const reg = /\w\d\w\d/i;
+
+// console.log(str.match(reg));
+
+//                                          Обратные классы 
+// \D -  не цифры
+// \W - не буквы
+// \S  - не пробелы
+
+const str = 'My name is R2D2';
+// const reg = /\W/ig;
+const reg = /\D/ig;
+
+console.log(str.match(reg));
