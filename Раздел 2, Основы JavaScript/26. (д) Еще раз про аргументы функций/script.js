@@ -1,11 +1,17 @@
-'use strict';
+'use strict'
 
-const usdCurr = 41;
-const eurCurr = 39;
+const usdCurr = 41
+const eurCurr = 39
 
-function convert( amount, currency) {
-    console.log(currency * amount);
+const currentExchangeRate = (amount, currency) => {
+  console.log(amount * currency)
 }
+currentExchangeRate(600, usdCurr)
+currentExchangeRate(600, eurCurr)
 
-convert(500, usdCurr);
-convert(500, eurCurr);
+const arr = [0, -1, -2, 4, 2, -3, -10, 'name', 'car']
+
+const sortArr = arr.filter(
+  (isPositive) => isPositive > 0 || typeof isPositive === 'string'
+)
+console.log(sortArr)
