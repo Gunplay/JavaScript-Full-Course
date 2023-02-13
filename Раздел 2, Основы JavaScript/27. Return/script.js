@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // const usdCurr = 28;
 // const eurCurr = 39;
@@ -19,17 +19,18 @@
 // // convert(500, eurCurr);
 
 // function test() {
-//     for (let i = 0; i < 5; i++) {
-//         console.log(i);
-//         if ( i === 3 ) return
+//   for (let i = 0; i < 5; i++) {
+//     console.log(i)
+//     if (i === 3) {
+//       return
 //     }
-//     console.log('DONE');
+//   }
+//   console.log('DONE')
 // }
-// test();
+// test()
 
-
-// function doNothing() {};
-// console.log(doNothing() === undefined); //true
+// function doNothing() {}
+// console.log(doNothing() === undefined) //true
 
 // Задание на работу с функциями
 // В этих заданиях мы с вами потренируемся создавать небольшие полезные функции. Это основа всего в JS и дальше по курсу вы будете в этом убеждаться :)
@@ -76,12 +77,11 @@
 
 // Да, задача сложнее, но она просто объединяет все то, что мы уже учили.
 
-
 // Место для первой задачи
-// function sayHello(person) {
-//     return `Привет, ${person}!`;
+// function sayHello(person, text) {
+//   return `Hi, ${person} ${text}!`
 // }
-// console.log(sayHello('Антон'));
+// console.log(sayHello('Anton!', 'Hello my dear friend'))
 
 // 2) Создайте функцию, которая принимает в себя 1 аргумент в виде целого числа и возвращает массив из трех чисел: одно на 1 меньше, сам аргумент, и число на 1 больше.
 
@@ -89,52 +89,49 @@
 
 // Место для второй задачи
 // function returnNeighboringNumbers(intNum) {
-//     let arr = []
-   
-//     arr.push(intNum - 1);
-//     arr.push(intNum);
-//     arr.push(intNum + 1);
-//     return arr;
+//   let arr = []
+
+//   arr.push(intNum - 1)
+//   arr.push(intNum)
+//   arr.push(intNum + 1)
+//   return arr
 // }
-// console.log(returnNeighboringNumbers(5));
+// console.log(returnNeighboringNumbers(5))
 
 // function returnNeighboringNumbers(num) {
-//     return [num - 1, num, num + 1];
+//   return [num - 1, num, num + 1]
 // }
 
-// console.log(returnNeighboringNumbers(5));
+// console.log(returnNeighboringNumbers(5))
 
 // Место для третьей задачи
 // function getMathResult(num, n) {
-   
-// let result;
+//   let result
 
-// for (let i = num; i < n; i++) {
-  
-//    result = num * n; 
-
-// }
-// return result;
+//   for (let i = num; i < n; i++) {
+//     result = num * n
+//   }
+//   return result
 // }
 
-// console.log(getMathResult(3, 10));
+// console.log(getMathResult(3, 10))
 
 function getMathResult(num, n) {
- if (typeof(n) !== 'number' || n <= 0) {
-   return num;
- }
-
-let str = '';
-
-for ( let i = 1; i <= n; i++) {
-  if ( i === n) {
-    str = str + `${num * i}`
+  if (typeof n !== 'number' || n <= 0) {
+    return num
   }
-    else {
-      str += `${num * i}---`
-   }
-}
 
-return str;
+  let str = ''
+
+  for (let i = 1; i <= n; i++) {
+    if (i === n) {
+      //6) 10 * 6
+      str = str + `${num * i}, done`
+    } else {
+      str += `${num * i}---` // 1) 10 * 1    2) 10 * 2   3) 10 * 3    4) 10  * 4    5) 10 * 5
+    }
+  }
+
+  return str
 }
-console.log(getMathResult(10, 5));
+console.log(getMathResult(10, 6))

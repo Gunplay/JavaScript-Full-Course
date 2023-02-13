@@ -1,8 +1,7 @@
-
-'use strict';
+'use strict'
 
 // function first() {
-//     // Do something 
+//     // Do something
 //     console.log('Hi');
 //     setTimeout(function() {
 //         console.log('My name is Adam');
@@ -42,7 +41,6 @@
 
 // myHome('Dnepr', yearsOldTown);
 
-
 // function mult() {
 //     let oneNumber = 3;
 
@@ -59,15 +57,14 @@
 
 // console.log(count);
 
-
 // function createCounter() {
 //     let counter = 3;
 
 //     const myFunction = function() { debugger
 //         counter = counter * 4; debugger
-      
+
 //         return counter; debugger
-       
+
 //     }
 //     return myFunction;
 // }
@@ -79,32 +76,57 @@
 //  const c0 = increment(); debugger
 //  console.log(c0);
 
-
 // Call-back function - это когда функция которая должна быть выполнена после того как другая функция завершила своё выполнение!
 
-function one() {
-    // do something
-    let two = setTimeout(function() {
-        console.log('hi')
-    }, 1000);
-};
+// function one() {
+//     // do something
+//     let two = setTimeout(function() {
+//         console.log('hi')
+//     }, 1000);
+// };
 
-function two() {
-    console.log(`I'm first!`);
+// function two() {
+//     console.log(`I'm first!`);
+// }
+
+// // one();
+// // two();
+
+// function  learnJS(lang, callback) {
+//     console.log(`I learn ${lang}`);
+//     callback();
+// }
+
+// learnJS('JavaScript', function( ) {
+
+//     setTimeout(function(){
+//     console.log('I have done this lesson!')
+//     }, 1000);
+// });
+
+function drive(car, callback, func, finished) {
+  console.log(`My car is ${car}`)
+  func()
+  callback()
+  finished()
 }
 
-// one();
-// two();
-
-function  learnJS(lang, callback) {
-    console.log(`I learn ${lang}`);
-    callback();
+function done() {
+  setTimeout(function () {
+    console.log('done')
+  }, 6000)
 }
-
-learnJS('JavaScript', function( ) {
-
-    setTimeout(function(){
-    console.log('I have done this lesson!')
-    }, 1000);
-});
-
+drive(
+  'Mazda',
+  function () {
+    setTimeout(function () {
+      console.log('Im already home')
+    }, 5000)
+  },
+  function () {
+    setTimeout(function () {
+      console.log('Driving...')
+    }, 200)
+  },
+  done
+)

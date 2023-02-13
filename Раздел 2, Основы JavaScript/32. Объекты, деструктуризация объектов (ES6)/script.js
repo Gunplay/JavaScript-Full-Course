@@ -1,40 +1,53 @@
-
-'use strict';
+'use strict'
 
 const options = {
-    name: 'test',
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: 'black',
-        bg: 'red',
-    },
-    radius: 300,
-    makeTest: function() {
-        console.log('Tect');
-    }
-};
-
+  name: 'test',
+  width: 1024,
+  height: 1024,
+  colors: {
+    border: 'black',
+    bg: 'red',
+  },
+  radius: 300,
+  makeTest: function () {
+    console.log('Tect')
+  },
+}
 
 const car = {
-    audi: 'RS8',
-    mersedes: 'CLE',
-    priceAudi: {
-        color: 'black',
-        price: '$55 000'
-    },
-    priceMersedes: {
-        color: 'white',
-        price: '$79 000',
-    },
+  audi: 'RS8',
+  mersedes: 'CLE',
+  priceAudi: {
+    color: 'black',
+    price: '$55 000',
+  },
+  priceMersedes: {
+    color: 'white',
+    price: '$79 000',
+  },
 }
+
+console.log(Object.entries(car).length)
+// console.log(Object.keys(car))
+// let counter = 0
+// for (let key in car) {
+//   if (typeof car[key] === 'object') {
+//     for (let i in car[key]) {
+//       console.log(`Свойство ${i}, значение ${car[key][i]}`)
+//       counter++
+//     }
+//   } else {
+//     console.log(`Свойство ${key}, значение ${car[key]}`)
+//     counter++
+//   }
+// }
+// console.log(counter)
 // options.makeTest();
 
 // Деструктуризация
 // const {border, bg} = options.colors;
 // console.log(border);
 // console.log(bg);
-
 
 // const {color, price} = car.priceAudi;
 // console.log(`Adudi RS 8 color: ${color}, price: ${price}`);
@@ -60,26 +73,28 @@ const car = {
 //     }   else {
 //         console.log(`Свойство: ${key} и значение ${options[key]}`);
 //     //     counter++;
-//     // 
+//     //
 // }
 //     counter++;
-// }   
+// }
 // console.log(counter);
 
-const name = 'Kirill';
-const work = "Java Script";
-const number = +380342342312;
+const name = 'Kirill'
+const work = 'Java Script'
+const number = +380342342312
 
 const infoKirill = {
-    name,
-    work,
-    number: number,
+  name,
+  work,
+  number: number,
+  car: 'audi',
 }
 
-console.log(infoKirill);
+// console.log(infoKirill)
 
-let telephoneKirill = function({number, work, name}) {
-    // console.log(`Number Kirill: ${number}`)
-    return [number, work] , `name: ${name}`
+let telephoneKirill = function ({ number, work, name, car }) {
+  // console.log(`Number Kirill: ${number}`)
+  return [number, work, car], `name: ${car}`
 }
-console.log(telephoneKirill(infoKirill));
+
+console.log(telephoneKirill(infoKirill))
