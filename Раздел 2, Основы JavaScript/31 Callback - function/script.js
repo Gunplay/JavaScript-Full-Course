@@ -90,43 +90,41 @@
 // }
 
 // // one();
+learnJS('JavaScript', function () {
+  setTimeout(function () {
+    console.log('I have done this lesson!')
+  })
+})
 // // two();
 
-// function  learnJS(lang, callback) {
-//     console.log(`I learn ${lang}`);
-//     callback();
+function learnJS(lang, callback) {
+  console.log(`I learn ${lang}`)
+  callback()
+}
+
+// function drive(car, callback, func, finished) {
+//   console.log(`My car is ${car}`)
+//   func()
+//   callback()
+//   finished()
 // }
 
-// learnJS('JavaScript', function( ) {
-
-//     setTimeout(function(){
-//     console.log('I have done this lesson!')
-//     }, 1000);
-// });
-
-function drive(car, callback, func, finished) {
-  console.log(`My car is ${car}`)
-  func()
-  callback()
-  finished()
-}
-
-function done() {
-  setTimeout(function () {
-    console.log('done')
-  }, 6000)
-}
-drive(
-  'Mazda',
-  function () {
-    setTimeout(function () {
-      console.log('Im already home')
-    }, 5000)
-  },
-  function () {
-    setTimeout(function () {
-      console.log('Driving...')
-    }, 200)
-  },
-  done
-)
+// function done() {
+//   setTimeout(function () {
+//     console.log('done')
+//   }, 6000)
+// }
+// drive(
+//   'Mazda',
+//   function () {
+//     setTimeout(function () {
+//       console.log('Im already home')
+//     }, 5000)
+//   },
+//   function () {
+//     setTimeout(function () {
+//       console.log('Driving...')
+//     }, 200)
+//   },
+//   done
+// )

@@ -43,13 +43,13 @@
 
 // console.log(document.querySelector('#current').parentNode)
 
-console.log(document.body.childNodes)
-for (let node of document.body.childNodes) {
+let collectionHTML = document.body.childNodes
+for (let node of collectionHTML) {
   if (node.nodeName == '#text' || node.nodeName == '#comment') {
     continue
   }
-  //   let arrElement = [...node]
-  //   console.log(arrElement)
+
+  console.log(node)
 }
 
 // const btns = document.getElementsByTagName('button')
