@@ -15,8 +15,7 @@
 // enumerable - нумерация
 // configurable - удаление
 
-//                                                  FUNKCTION CONSTRUCTOR   ES 5                                           
-
+//                                                  FUNKCTION CONSTRUCTOR   ES 5
 
 // const num = new Number(3);
 // console.log(num);
@@ -48,7 +47,7 @@
 // // наследование от потомка
 // CarCreate.prototype.exit = function() {
 //     console.log(`User ${this.mark} exit`);
-// } 
+// }
 
 // const bmw = new CarCreate('Bmw', 'white', "$99000");
 // const audi = new CarCreate('Audi', 'black', "$89000");
@@ -69,7 +68,7 @@
 // const unique = new Set(objAudi);
 // console.log(unique);
 
-//                                      THIS 
+//                                      THIS
 
 // function showThis(a, b){
 //     console.log(this);
@@ -104,18 +103,15 @@
 // const ivan = new User('Ivan', 28); debugger
 // console.log(ivan); debugger
 
-
 // function sayName(surname, surnameTwo) {
 //     console.log(this);
 //     console.log(this.name + ' ' + surname + ' ' +  surnameTwo);
-    
+
 // }
 
 // const user = {
 //     name: 'John',
 // }
-
-
 
 // sayName.call(user, 'Smith', 'Intain');
 // sayName.apply(user, ['Smith', 'Intain']);
@@ -132,30 +128,123 @@
 // 3) this в конструкторах и классах  - это новый экземпляр объекта!
 // 4) Ручная привязка this: call, apply, bind!
 
-const btn = document.querySelector('button');
+// const btn = document.querySelector('button')
 
 // когда через function declaration объект события сам элемент!
 // через functional expression - нету своего this, и это будет window!
-btn.addEventListener('click', (event) =>{
-    console.log(this);
-    // this.style.backgroundColor = 'red';
-    event.target.style.backgroundColor = 'red';
-});
+// btn.addEventListener('click', (event) =>{
+//     // console.log(this);
+//     // this.style.backgroundColor = 'red';
+//     event.target.style.backgroundColor = 'red';
+// });
 
-const obj = {
-    num: 5,
-    sayNumber: function () {
-        const say = () => {
-            console.log(this.num); // у  functional expression нету своего this, оно ищет у свого родителя!
-        };
-        say();
-    }
+// const obj = {
+//     num: 5,
+//     sayNumber: function () {
+//         const say = () => {
+//             console.log(this.num); // у  functional expression нету своего this, оно ищет у свого родителя!
+//         };
+//         say();
+//     }
+// }
+
+// obj.sayNumber();
+
+// const double = (a, b) => a * 2 / b;
+// const one = c => c * 1;
+
+// console.log(double(4, 8));
+// console.log(one(9));
+
+// function showThis(a, b) {
+//   console.log(this)
+//   function sum() {
+//     console.log(this)
+//     // return a + b
+//     return this.a + this.b
+//   }
+//   console.log(sum())
+// }
+// showThis(4, 5)
+
+// const obj = {
+//   a: 20,
+//   b: 15,
+//   sum: function () {
+//     // console.log(this)
+//     function shout() {
+//         console.log(this)
+//     }
+//     shout()
+// }
+
+// obj.sum()
+
+// function User(name, id) {
+//   this.name = name
+//   this.id = id
+//   this.human = true
+//   this.hello = function () {
+//     console.log('Hello!' + this.name)
+//   }
+//   this.hello()
+// }
+
+// let ivan = new User('Ivan', 23)
+
+// console.log(ivan)
+
+function sayName(surname) {
+  console.log(this)
+  console.log(this.name + ' ' + surname)
 }
 
-obj.sayNumber();
+const user = {
+  name: 'John',
+}
 
-const double = (a, b) => a * 2 / b;
-const one = c => c * 1;
+sayName.call(user, 'TwT')
+sayName.apply(user, ['TwT'])
 
-console.log(double(4, 8));
-console.log(one(9));
+function count(num) {
+  return this * num
+}
+
+const double = count.bind(2) //  =>  return this * num
+console.log(double(3))
+console.log(double(13))
+
+function mult(number) {
+  return this * number
+}
+
+const multOn = mult.bind(2)
+console.log(multOn(10))
+// 1) Simply func: this = window, but if use 'use strict' - undefined
+// 2) Contex у методов объекта - сам объект
+// 3) this в конструкторах и классах это новый экземпляр объекта
+// 4) Ручаня привязка this: call, apply, bind
+
+// const btn = document.querySelector('button')
+
+// btn.addEventListener('click', (e) => {
+//   // undefined
+//   this.style.backgroundColor = 'red'
+//   //   e.target.style.backgroundColor = 'red'
+//   console.log(this) // cам жлеменет на котором произошло событие - button
+// })
+
+// const obj = {
+//   num: 5,
+//   sayNumber: function () {
+//     const say = () => {
+//       console.log(this) // Arrow dont have himself this
+//     }
+//     say()
+//   },
+// }
+
+// obj.sayNumber()
+
+// const double = (a, b) => a * 2 * b
+// console.log(double(2, 3))

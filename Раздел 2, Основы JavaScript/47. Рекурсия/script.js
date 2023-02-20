@@ -30,77 +30,77 @@
 // // console.log(pow(3, 2))
 // console.log(pow(3, 4))
 
-let students = {
-  js: [
-    {
-      name: 'John',
-      progress: 100,
-    },
-    {
-      name: 'Ivan',
-      progress: 60,
-    },
-  ],
+// let students = {
+//   js: [
+//     {
+//       name: 'John',
+//       progress: 100,
+//     },
+//     {
+//       name: 'Ivan',
+//       progress: 60,
+//     },
+//   ],
 
-  html: {
-    basic: [
-      {
-        name: 'Peter',
-        progress: 20,
-      },
-      {
-        name: 'Ann',
-        progress: 18,
-      },
-    ],
+//   html: {
+//     basic: [
+//       {
+//         name: 'Peter',
+//         progress: 20,
+//       },
+//       {
+//         name: 'Ann',
+//         progress: 18,
+//       },
+//     ],
 
-    pro: [
-      {
-        name: 'Sam',
-        progress: 10,
-      },
-    ],
-    semi: [
-      {
-        name: 'Test',
-        progress: 100,
-      },
-    ],
-  },
-}
+//     pro: [
+//       {
+//         name: 'Sam',
+//         progress: 10,
+//       },
+//     ],
+//     semi: [
+//       {
+//         name: 'Test',
+//         progress: 100,
+//       },
+//     ],
+//   },
+// }
 
-function getTotalProgerssByRecursion(data) {
-  if (Array.isArray(data)) {
-    // console.log(data);
-    let total = 0
+// function getTotalProgerssByRecursion(data) {
+//   if (Array.isArray(data)) {
+//     // console.log(data);
+//     let total = 0
 
-    for (let i = 0; i < data.length; i++) {
-      total += data[i].progress
-    }
+//     for (let i = 0; i < data.length; i++) {
+//       total += data[i].progress
+//     }
 
-    // console.log([total, data.length]);
-    return [total, data.length]
-  } else {
-    let total = [0, 0] // [ 160, 2 ]
+//     // console.log([total, data.length]);
+//     return [total, data.length]
+//   } else {
+//     let total = [0, 0] // [ 160, 2 ]
 
-    for (let subData of Object.values(data)) {
-      // console.log(subData);
-      const subDataArr = getTotalProgerssByRecursion(subData)
-      //   console.log(subDataArr)
-      // 160   + 38 + 10 + 100
-      total[0] += subDataArr[0]
-      //
-      total[1] += subDataArr[1]
-      //   console.log(total[0])
-      //   console.log(total[1])
-      console.log(total)
-    }
+//     for (let subData of Object.values(data)) {
+//       // console.log(subData);
+//       const subDataArr = getTotalProgerssByRecursion(subData)
+//       //   console.log(subDataArr)
+//       // 160   + 38 + 10 + 100
+//       total[0] += subDataArr[0]
+//       //
+//       total[1] += subDataArr[1]
+//       //   console.log(total[0])
+//       //   console.log(total[1])
+//       console.log(total)
+//     }
 
-    return total
-  }
-}
-const result = getTotalProgerssByRecursion(students)
-console.log((result[0] / result[1]).toFixed(1))
+//     return total
+//   }
+// }
+// const result = getTotalProgerssByRecursion(students)
+// console.log((result[0] / result[1]).toFixed(1))
 
 // function getTotalProgerssByIteration(data) {
 //   let total = 0
@@ -130,23 +130,22 @@ console.log((result[0] / result[1]).toFixed(1))
 
 // console.log(getTotalProgerssByIteration(students))
 
-// function factorial(n) {
-//   if (typeof(n) !== 'number' || !Number.isInteger(n)) {
-//       return "Ошибка, проверьте данные";
-//   }
+function factorial(n) {
+  if (typeof n !== 'number' || !Number.isInteger(n)) {
+    return 'Ошибка, проверьте данные'
+  }
 
-//   if (n >= 1) {
-//       return n * factorial(n - 1);
-//   } else {
-//       return 1;
-//   }
+  // if (n >= 1) {
+  //   return n * factorial(n - 1)
+  // } else {
+  //   return 1
+  // }
 
-//   // Более короткий вариант, который вы можете встретить
-//   // Но не учитывает отрицательные значения
-//   return n ? n * factorial(n - 1) : 1;
-// }
-
-// factorial(5)
+  // Более короткий вариант, который вы можете встретить
+  // Но не учитывает отрицательные значения
+  return n ? n * factorial(n - 1) : 1
+}
+console.log(factorial(5))
 
 // function factorial(n){
 
@@ -180,15 +179,14 @@ console.log((result[0] / result[1]).toFixed(1))
 // }
 // console.log(factorial(5));
 
-// function fibonachi(n) {
-//   if ( n <= 1 ) {
-//     return n;
-//   } else {
-//     return fibonachi(n - 1) + fibonachi( n - 2);
-//   }
-
-// }
-// console.log(fibonachi(7));
+function fibonachi(n) {
+  if (n <= 1) {
+    return n
+  } else {
+    return fibonachi(n - 1) + fibonachi(n - 2)
+  }
+}
+console.log(fibonachi(3))
 
 // function ciclefactorial( ) {
 
@@ -205,15 +203,14 @@ console.log((result[0] / result[1]).toFixed(1))
 // }
 // console.log(ciclefactorial(5));
 
-// function fact (arr) {
-
-//   let result = 1;
-//   for ( let i = 1; i <= arr.length; i++) {
-//     result = result * i;
-//   }
-//   return result;
-// }
-// console.log(fact([1, 2, 3, 4, 5, 6]));
+function fact(arr) {
+  let result = 1
+  for (let i = 1; i <= arr.length; i++) {
+    result = result * i
+  }
+  return result
+}
+console.log(fact([1, 2, 3, 4, 5, 6]))
 
 // function fib(n) {
 

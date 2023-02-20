@@ -15,8 +15,7 @@
 // enumerable - нумерация
 // configurable - удаление
 
-//                                                  FUNKCTION CONSTRUCTOR   ES 5                                           
-
+//                                                  FUNKCTION CONSTRUCTOR   ES 5
 
 // const num = new Number(3);
 // console.log(num);
@@ -51,7 +50,7 @@
 // // наследование от потомка
 // CarCreate.prototype.exit = function() {
 //     console.log(`User ${this.mark} exit`);
-// } 
+// }
 
 // const bmw = new CarCreate('Bmw', 'white', "$99000");
 // const audi = new CarCreate('Audi', 'black', "$89000");
@@ -72,53 +71,56 @@
 // const unique = new Set(objAudi);
 // console.log(unique);
 
-
+// =============================================================================================================================
 //                                                  Class ES 6
 
-class Reactanle {
-// концепт    
-    constructor(height, width) {
-        this.height = height;
-        this.width = width;
-    }
+class Reactangle {
+  // concept
+  constructor(height, width) {
+    this.height = height
+    this.width = width
+  }
 
-    calcArea() {
-        return this.height * this.width;
-    }
+  calcArea() {
+    return this.height * this.width
+  }
 }
 
-Extands - наследование
-class ColoredRectangWithText extends Reactanle {
-    constructor(height, width, text, bgColor) {
-        super(height, width); // active parent
-        this.text = text;
-        this.bgColor = bgColor;
-    }
+// Extands - наследование
+class ColoredRectangWithText extends Reactangle {
+  constructor(height, width, text, bgColor) {
+    super(height, width) // active parent
+    this.text = text
+    this.bgColor = bgColor
+  }
 
-    showMyProps() {
-        console.log(`Text: ${this.text}, BackGroundColor: ${this.bgColor}`);
-    }
+  showMyProps() {
+    console.log(`Text: ${this.text}, BackGroundColor: ${this.bgColor}`)
+  }
 }
 
-// // Экземпляр
-let div = document.createElement('div');
+// // // Экземпляр
+// let div = document.createElement('div')
 
-div = new Reactanle(40, 40),
-console.log(div);
-
-
-const square = new Reactanle(10, 10);
-console.log(square.calcArea());
+// ;(div = new Reactanle(40, 40)), console.log(div)
+const square = new Reactangle(10, 10)
+const bigSquare = new Reactangle(15, 15)
+console.log(square.calcArea())
+console.log(bigSquare.calcArea())
 // const long = new Reactanle(20, 100);
 // // Экземпляр
-// const div = new ColoredRectangWithText(25, 10, 'Hello World', 'red');
-// div.showMyProps();
-// console.log(div.calcArea());
+const div = new ColoredRectangWithText(25, 10, 'Hello World', 'red')
+div.showMyProps()
+console.log(div.calcArea())
 
 // console.log(square.calcArea());
 // console.log(long.calcArea());
 
-
-
 // ООП 1) Абстракция - отделение от экземпляра
 //     2) Наследование
+
+function getAge(...args) {
+  console.log(typeof args)
+  console.log(args)
+}
+getAge(21)

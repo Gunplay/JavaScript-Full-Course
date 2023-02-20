@@ -32,3 +32,7 @@ button {
   height: 40px;
   width: 100px;
 }
+
+.green {
+  background-color: lightseagreen;
+}

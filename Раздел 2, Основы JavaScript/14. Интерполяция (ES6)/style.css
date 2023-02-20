@@ -1,0 +1,10 @@
+.square {
+  width: 200px;
+  height: 200px;
+}
+
+/* пвсевдо классы */
+.square:hover {
+}
+/* псведо-элементы */
+:last-child: first;
