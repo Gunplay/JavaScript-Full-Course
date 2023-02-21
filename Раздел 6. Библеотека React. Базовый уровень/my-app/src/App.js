@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component, StrictMode } from 'react'
+import './App.css'
+
+const Header = () => {
+  return (
+    <div>
+      <h2 style={{ backgroundColor: 'orange' }}>Hello World!</h2>
+      <h2 style={{ backgroundColor: 'orange' }}>Hello World!</h2>
+    </div>
+  )
+}
+
+// const Field = () => {
+//   const holder = 'Enter here'
+//   const styleField = {
+//     width: '300px',
+//     fontSize: '20px',
+//     backgroundColor: 'yellow',
+//     marginBottom: '20px',
+//   }
+//   console.log(styleField)
+//   return <input placeholder={holder} type="text" style={styleField} />
+// }
+
+class Field extends Component {
+  render() {
+    const holder = 'Enter here'
+    const styleField = {
+      width: '300px',
+      fontSize: '20px',
+      backgroundColor: 'yellow',
+      marginBottom: '20px',
+    }
+
+    return <input placeholder={holder} type="text" style={styleField} />
+  }
+}
+
+function Btn() {
+  const text = 'Log in'
+  // const res = () => {
+  //   return 'Log in'
+  // }
+  const objInfo = {
+    logged: true,
+  }
+  // const logged = false
+  // const p = <p>Log in</p>
+  return <button>{objInfo.logged ? 'Enter' : text}</button>
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <StrictMode>
+        <Header />
+      </StrictMode>
+      <Field />
+      <Btn />
     </div>
-  );
+  )
 }
 
-export default App;
+export { Header }
+export default App
