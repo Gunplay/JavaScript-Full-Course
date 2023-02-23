@@ -1,11 +1,41 @@
 import { Component, StrictMode } from 'react'
 import './App.css'
 
+function WhoAmI({ name, surname, link }) {
+  return (
+    <div>
+      <h1>
+        My name is {name()}, surname - {surname}
+      </h1>
+      <a href={link}>My profile</a>
+    </div>
+  )
+}
+
 const Header = () => {
   return (
     <div>
-      <h2 style={{ backgroundColor: 'orange' }}>Hello World!</h2>
-      <h2 style={{ backgroundColor: 'orange' }}>Hello World!</h2>
+      {/* <h2 style={{ backgroundColor: 'orange' }}>Hello World!</h2> */}
+      {/* <WhoAmI
+        name={{ firstName: 'John' }}
+        surname="Smith"
+        link="facebook.com"
+      />
+      <WhoAmI name={{ firstName: 'Colin' }} surname="Corith" link="insta.com" /> */}
+      <WhoAmI
+        name={() => {
+          return 'John'
+        }}
+        surname="Corith"
+        link="insta.com"
+      />
+      <WhoAmI
+        name={() => {
+          return 'John'
+        }}
+        surname="Corith"
+        link="insta.com"
+      />
     </div>
   )
 }
