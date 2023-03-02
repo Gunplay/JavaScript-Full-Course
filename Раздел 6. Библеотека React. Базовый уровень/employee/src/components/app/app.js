@@ -47,6 +47,7 @@ class App extends Component {
         },
       ],
       term: '',
+      filter: 'all',
     }
     this.maxId = 5
   }
@@ -141,11 +142,27 @@ class App extends Component {
   onUpdateSearch = (term) => {
     this.setState({ term: term })
   }
+  // STATIC func call without on
+  filterPost = (items, filter) => {
+    switch (filter) {
+      case 'rise':
+        return items.filter((item) => item.rise)
+      case 'salaryMoreThenThousend':
+        return items.filter((item) => item.salary > 1000)
+      default: // When it is not executed by the filter, we return just an array
+        return items
+    }
+  }
+  // Func which used users call ON
+  onFilterSelect = (filter) => {
+    this.setState({ filter })
+  }
   render() {
-    const { data, term } = this.state
+    const { data, term, filter } = this.state
     const countEmployees = data.length
     const receiveAnAward = data.filter((item) => item.increase === true).length
-    const visibleData = this.searchEmp(data, term)
+    // const visibleData = this.searchEmp(data, term)
+    const visibleData = this.filterPost(this.searchEmp(data, term), filter) // 1) The first option executed searchEmp, next filter by attribute
     return (
       <div className="app">
         <AppInfo
@@ -154,7 +171,7 @@ class App extends Component {
         />
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch} />
-          <AppFilter />
+          <AppFilter filter={filter} onFilterSelect={this.onFilterSelect} />
         </div>
         <EmloyersList
           data={visibleData}
