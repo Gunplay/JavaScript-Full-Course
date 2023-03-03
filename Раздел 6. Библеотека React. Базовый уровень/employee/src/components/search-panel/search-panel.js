@@ -19,7 +19,7 @@ class SearchPanel extends Component {
       <input
         type="text"
         className="form-control seacrh-input"
-        placeholder="Найти сотрудника"
+        placeholder="Find an employee"
         value={this.state.term}
         onChange={this.onUpdateSearch} // Поднятие локального состояния родителю!
       />

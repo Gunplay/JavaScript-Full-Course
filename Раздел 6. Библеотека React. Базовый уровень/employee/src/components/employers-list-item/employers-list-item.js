@@ -56,7 +56,7 @@ const EmployersListItem = (props) => {
       <input
         type="text"
         className="list-group-item-input"
-        defaultValue={salary + ' ' + 'UAH'}
+        defaultValue={salary + ' ' + '$'}
       />
       <div className="d-flex justify-content-center align-items-center">
         <button

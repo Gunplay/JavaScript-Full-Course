@@ -1,17 +1,19 @@
 .list-group-item {
+  display: flex;
+  justify-content: space-between;
   padding: 15px 20px;
   border-bottom: 1px solid wheat;
 }
 
 .list-group-item:first-child {
-  border-bottom: none;
+  /* border-bottom: none; */
 }
 
 .list-group-item span {
   line-height: 35px;
   font-size: 20px;
   cursor: pointer;
-  width: 34.375rem;
+  /* width: 34.375rem; */
 }
 
 .list-group-item input {

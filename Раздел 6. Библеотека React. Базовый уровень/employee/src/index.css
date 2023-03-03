@@ -6,8 +6,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: darkgray;
+  /* width: 200px;
+  height: 200px; */
+  transition-property: background-color;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
 }
 
+body:hover {
+  background-color: black;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
