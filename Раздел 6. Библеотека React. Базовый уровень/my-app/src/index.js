@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import { Header } from './App'
+import BootstrapTest from './BootstrapTest'
+import styled from 'styled-components'
+import { Button } from './App'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 // const helloReact = <h1>Hello World!</h1>
 // Cntl + shift + p setting user -EMMEt (auto-complete)
 // const text = 'Hello World!'
@@ -30,9 +35,14 @@ import { Header } from './App'
 //   },
 // }
 
+const BigButton = styled(Button)`
+  margin: 0 auto;
+  width: 245px;
+`
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <StrictMode>
-    <App />,
+    <App />,<BigButton as="a">Send report+</BigButton>
+    <BootstrapTest />
   </StrictMode>
 )

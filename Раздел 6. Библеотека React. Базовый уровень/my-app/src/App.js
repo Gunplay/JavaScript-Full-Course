@@ -1,6 +1,35 @@
 import { Component, StrictMode } from 'react'
+import styled from 'styled-components'
 import './App.css'
 
+const EmpItem = styled.div`
+  padding: 20px;
+  margin-bottom: 15px;
+  border-raduis: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  a {
+    display: block;
+    color: ${(props) => (props.active ? 'orange' : 'black')};
+  }
+  input:hover {
+    background-color: orange;
+  }
+  input:after {
+    background-color: orange;
+  }
+`
+
+const Header = styled.h1`
+  fons-size: 22px;
+`
+
+export const Button = styled.button`
+  background: orange;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 10px;
+  color: dark;
+`
 class WhoAmI extends Component {
   constructor(props) {
     super(props)
@@ -11,7 +40,7 @@ class WhoAmI extends Component {
       position: '',
     }
     // this.nextYear = this.nextYear.bind 1) One option
-    this.previusYear = this.previusYear.bind
+    this.previusYear = this.previusYear.bind(this)
   }
 
   nextYear = () => {
@@ -44,16 +73,16 @@ class WhoAmI extends Component {
     const { position, years, textMinus } = this.state
 
     return (
-      <div>
+      <EmpItem active>
         {/* Second option - when we use anonim func/}
         {/* <button onClick={() => this.nextYear()}>{this.state.text}</button> */}
-        <button onClick={this.nextYear}>{this.state.text}</button>
+        <Button onClick={this.nextYear}>{this.state.text}</Button>
         <button onClick={this.previusYear}>{textMinus}</button>
-        <h1>
+        <Header>
           My name is {name}, surname - {surname}, age - {years}, <br></br>
           position:
           {position}
-        </h1>
+        </Header>
         <a href={link}>My profile</a>
         <form>
           <span>Ввдеите должность</span>
@@ -67,12 +96,12 @@ class WhoAmI extends Component {
             }
           />
         </form>
-      </div>
+      </EmpItem>
     )
   }
 }
 
-const Header = () => {
+const HeaderMain = () => {
   return (
     <div>
       {/* <h2 style={{ backgroundColor: 'orange' }}>Hello World!</h2> */}
@@ -127,15 +156,20 @@ function Btn() {
   return <button>{objInfo.logged ? 'Enter' : text}</button>
 }
 
+const Wrapper = styled.div`
+  background-color: steelblue;
+  width: 600px;
+  margin: 80px auto 0 auto;
+`
 function App() {
   return (
-    <div className="App">
+    <Wrapper>
       <StrictMode>
-        <Header />
+        <HeaderMain />
       </StrictMode>
       <Field />
       <Btn />
-    </div>
+    </Wrapper>
   )
 }
 
