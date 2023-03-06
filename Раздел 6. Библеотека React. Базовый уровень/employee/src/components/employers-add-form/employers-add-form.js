@@ -3,13 +3,24 @@ import { Component } from 'react'
 // npm i sass --save  - save dependens
 import './employers-add-form.scss'
 class EmployersAddForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: '',
-      salary: '',
-    }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     name: '',
+  //     salary: '',
+  //   }
+  // }
+  // Class Fields
+  state = {
+    name: '',
+    salary: '',
   }
+
+  static sayHi = () => {
+    console.log('Hey')
+  }
+
+  static str = 'on'
 
   onValueChange = (e) => {
     this.setState({
@@ -59,4 +70,6 @@ class EmployersAddForm extends Component {
   }
 }
 
+EmployersAddForm.sayHi()
+console.log(EmployersAddForm.str)
 export default EmployersAddForm
