@@ -9,7 +9,8 @@ import mjolnir from '../../resources/img/mjolnir.png'
 class RandomChar extends Component {
   constructor(props) {
     super(props)
-    this.updateChar() // Конструируем так чтобы получали данные сразу, то есть вызов идёт сразу - до нашей верстки, это плохая практика
+    //this.updateChar() // Конструируем так чтобы получали данные сразу, то есть вызов идёт сразу - до нашей верстки, это плохая практика
+    console.log('constructor')
   }
   // class Field
   state = {
@@ -19,6 +20,16 @@ class RandomChar extends Component {
   }
   marvelService = new MarvelService()
 
+  componentDidMount() {
+    this.updateChar()
+    this.timerId = setInterval(this.updateChar, 3000)
+    console.log('mount')
+  }
+
+  componentDidUnmount() {
+    clearInterval(this.timerId)
+    console.log('unmount')
+  }
   onCharLoaded = (char) => {
     this.setState({ char: char, loading: false }) // write new object or char
   }
@@ -31,7 +42,8 @@ class RandomChar extends Component {
   }
 
   updateChar = () => {
-    //                                        max     min - diapozon + min
+    console.log('update')
+    //                                      max     min - diapozon + min
     const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
     // this.marvelService.getAllCharacters().then((res) => console.log(res))
     this.marvelService
@@ -40,6 +52,7 @@ class RandomChar extends Component {
       .catch(this.onError)
   }
   render() {
+    console.log('render')
     const { char, loading, error } = this.state
     const errorMessage = error ? <ErrorMessage /> : null
     const spinner = loading ? <Spinner /> : null

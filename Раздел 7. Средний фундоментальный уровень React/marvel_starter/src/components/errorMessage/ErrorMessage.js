@@ -10,10 +10,9 @@ const ErrorMessage = () => {
         objectFit: 'contain',
         margin: '0 auto',
       }}
+      src={img}
       alt="Error"
-    >
-      {img}
-    </img>
+    />
   )
 }
 
