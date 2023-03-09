@@ -1,35 +1,53 @@
-import { Component } from 'react/cjs/react.production.min'
+import { Component } from 'react'
 import Spinner from '../spinner/Spinner'
-import MarvelService from '../../services/MarvelService'
 import ErrorMessage from '../errorMessage/ErrorMessage'
-import abyss from '../../resources/img/abyss.jpg'
+import MarvelService from '../../services/MarvelService'
 import './charList.scss'
 
 class CharList extends Component {
-  constructor(props) {
-    super(props)
-    console.log('constructor')
-  }
-
   state = {
     charList: [],
     loading: true,
     error: false,
+    newItemLoading: false,
+    offset: 210,
+    charEnded: false,
   }
 
   marvelService = new MarvelService()
 
   componentDidMount() {
-    // this.foo.bar = 0
-    this.marvelService
-      .getAllCharacters()
-      .then(this.onCharListLoaded)
-      .catch(this.onError)
-    console.log('mount')
+    this.onRequest() // N1
   }
 
-  onCharListLoaded = (charList) => {
-    this.setState({ charList: charList, loading: false })
+  onRequest = (offset) => {
+    this.onCharListLoading() // N2
+    this.marvelService
+      .getAllCharacters(offset) //N3 newState
+      .then(this.onCharListLoaded)
+      .catch(this.onError)
+  }
+
+  onCharListLoading = () => {
+    this.setState({
+      newItemLoading: true,
+    })
+  }
+
+  onCharListLoaded = (newCharList) => {
+    let ended = false
+    if (newCharList.length < 9) {
+      ended = true
+    }
+    //N 4
+    this.setState(({ offset, charList }) => ({
+      //              [ null ]   newItem
+      charList: [...charList, ...newCharList],
+      loading: false,
+      newItemLoading: false,
+      offset: offset + 9,
+      charEnded: ended,
+    }))
   }
 
   onError = () => {
@@ -38,9 +56,9 @@ class CharList extends Component {
       loading: false,
     })
   }
+
   // Этот метод создан для оптимизации,
   // чтобы не помещать такую конструкцию в метод render
-
   renderItems(arr) {
     const items = arr.map((item) => {
       let imgStyle = { objectFit: 'cover' }
@@ -67,7 +85,8 @@ class CharList extends Component {
   }
 
   render() {
-    const { charList, loading, error } = this.state
+    const { charList, loading, error, offset, newItemLoading, charEnded } =
+      this.state
 
     const items = this.renderItems(charList)
 
@@ -80,11 +99,17 @@ class CharList extends Component {
         {errorMessage}
         {spinner}
         {content}
-        <button className="button button__main button__long">
+        <button
+          className="button button__main button__long"
+          disabled={newItemLoading}
+          style={{ display: charEnded ? 'none' : 'block' }}
+          onClick={() => this.onRequest(offset)}
+        >
           <div className="inner">load more</div>
         </button>
       </div>
     )
   }
 }
+
 export default CharList
