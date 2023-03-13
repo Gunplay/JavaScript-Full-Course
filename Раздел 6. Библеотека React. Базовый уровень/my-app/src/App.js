@@ -1,7 +1,7 @@
-import { Component, StrictMode } from 'react'
+import React, { Component, StrictMode } from 'react'
 import styled from 'styled-components'
 import './App.css'
-
+import './buttons.css'
 const EmpItem = styled.div`
   padding: 20px;
   margin-bottom: 15px;
@@ -161,9 +161,50 @@ const Wrapper = styled.div`
   width: 600px;
   margin: 80px auto 0 auto;
 `
+//                                                                                 React.Children
+const DynamicGreating = (props) => {
+  return (
+    <div className={'mb-3 p-3 border border-' + props.color}>
+      {/* {props.children} */}
+      {/* elem or arr */}
+      {React.Children.map(props.children, (child) => {
+        return React.cloneElement(child, {
+          className: 'shadow p-3 m-3 border rounded', // props
+        })
+      })}
+    </div>
+  )
+}
+
+const WrapperForButton = (props, backgroundColor) => {
+  console.log(backgroundColor)
+  return (
+    <div style={{ backgroundColor }}>
+      {React.Children.map(props.children, (child) => {
+        return React.cloneElement(child, {
+          className: 'buttons', // props
+        })
+      })}
+    </div>
+  )
+}
+
 function App() {
   return (
     <Wrapper>
+      <WrapperForButton backgroundColor="red">
+        <button>One</button>
+        <button>Two</button>
+        <button>Three</button>
+        <button>Four</button>
+      </WrapperForButton>
+      <DynamicGreating color={'primary'}>
+        {/* ...children */}
+        <h2>This weel was hard</h2>
+        {/* child */}
+        <h2>Hello World!</h2>
+        <h2>Say Hi!</h2>
+      </DynamicGreating>
       <StrictMode>
         <HeaderMain />
       </StrictMode>

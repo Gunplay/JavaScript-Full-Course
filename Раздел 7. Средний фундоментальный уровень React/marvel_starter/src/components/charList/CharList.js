@@ -1,31 +1,59 @@
 import { Component } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../spinner/Spinner'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 import MarvelService from '../../services/MarvelService'
 import './charList.scss'
 
 class CharList extends Component {
+  constructor(props) {
+    super(props)
+  }
   state = {
     charList: [],
     loading: true,
+    loadingScroll: false,
     error: false,
     newItemLoading: false,
-    offset: 210,
+    offset: 0,
     charEnded: false,
+    id: uuidv4(),
   }
 
   marvelService = new MarvelService()
 
-  componentDidMount() {
-    this.onRequest() // N1
+  handleScroll = () => {
+    const { loadingScroll } = this.state
+    if (loadingScroll) {
+      return
+    }
+    const { innerHeight } = window
+    const { bottom } = this.listRef.getBoundingClientRect()
+    if (bottom <= innerHeight) {
+      this.onRequest(this.offset + 10)
+    }
   }
 
-  onRequest = (offset) => {
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll)
+    this.onRequest(this.offset) // N1
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
+
+  onRequest = async (offset) => {
     this.onCharListLoading() // N2
-    this.marvelService
-      .getAllCharacters(offset) //N3 newState
-      .then(this.onCharListLoaded)
-      .catch(this.onError)
+    try {
+      const response = await this.marvelService.getAllCharacters(offset) //N3 newState
+      this.onCharListLoaded(response)
+      console.log('res:', response)
+    } catch (err) {
+      this.onError(err)
+    }
+    // .then(this.onCharListLoaded)
+    // .catch(this.onError)
   }
 
   onCharListLoading = () => {
@@ -35,18 +63,23 @@ class CharList extends Component {
   }
 
   onCharListLoaded = (newCharList) => {
+    console.log(newCharList)
     let ended = false
-    if (newCharList.length < 9) {
+    if (newCharList?.length < 10) {
       ended = true
     }
     //N 4
     this.setState(({ offset, charList }) => ({
-      //              [ null ]   newItem
+      loadingScroll: true,
+      //  [ null ]   newItem
       charList: [...charList, ...newCharList],
       loading: false,
+
       newItemLoading: false,
-      offset: offset + 9,
-      charEnded: ended,
+      offset: offset,
+      charEnded: ended, //  ended = true
+      loadingScroll: false,
+      id: uuidv4(),
     }))
   }
 
@@ -72,6 +105,7 @@ class CharList extends Component {
       return (
         <li
           className="char__item"
+          ref={(ref) => (this.listRef = ref)}
           key={item.id}
           onClick={() => this.props.onCharSelected(item.id)}
         >

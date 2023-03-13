@@ -1,4 +1,5 @@
 import { Component } from 'react/cjs/react.production.min'
+import PropTypes from 'prop-types'
 import MarvelService from '../../services/MarvelService'
 import Spinner from '../spinner/Spinner'
 import ErrorMessage from '../errorMessage/ErrorMessage'
@@ -70,12 +71,17 @@ class CharInfo extends Component {
     const content = !(loading || error || !char) ? <View char={char} /> : null
 
     return (
-      <div className="char__info">
-        {skeleton}
-        {errorMessage}
-        {spinner}
-        {content}
-      </div>
+      <>
+        <div>
+          <div className="char__info">
+            {skeleton}
+            {errorMessage}
+            {spinner}
+            {content}
+          </div>
+        </div>
+        <div class="char__info-overlay"></div>
+      </>
     )
   }
 }
@@ -107,13 +113,7 @@ const View = ({ char }) => {
       </div>
       <div className="char__descr">
         {description}
-        {/* In Norse mythology, Loki is a god or jötunn (or both). Loki is the son
-        of Fárbauti and Laufey, and the brother of Helblindi and Býleistr. By
-        the jötunn Angrboða, Loki is the father of Hel, the wolf Fenrir, and the
-        world serpent Jörmungandr. By Sigyn, Loki is the father of Nari and/or
-        Narfi and with the stallion Svaðilfari as the father, Loki gave birth—in
-        the form of a mare—to the eight-legged horse Sleipnir. In addition, Loki
-        is referred to as the father of Váli in the Prose Edda. */}
+        {/* In Norse mythology, Loki is a god or jötunn (or both). Loki is the son */}
       </div>
       <div className="char__comics">Comics:</div>
       <ul className="char__comics-list">
@@ -146,4 +146,9 @@ const View = ({ char }) => {
     </>
   )
 }
+
+CharInfo.propTypes = {
+  charId: PropTypes.number,
+}
+
 export default CharInfo

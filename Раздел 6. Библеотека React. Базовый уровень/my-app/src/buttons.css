@@ -1,0 +1,8 @@
+.buttons {
+  margin: 100px auto;
+  background-color: yellow;
+  align-items: center;
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 5px;
+}

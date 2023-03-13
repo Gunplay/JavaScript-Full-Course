@@ -27,7 +27,7 @@ class RandomChar extends Component {
     // console.log('mount')
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     clearInterval(this.timerId)
     // console.log('unmount')
   }
