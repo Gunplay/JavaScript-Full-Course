@@ -17,31 +17,31 @@ class CharList extends Component {
     newItemLoading: false,
     offset: 0,
     charEnded: false,
-    id: uuidv4(),
+    // id: uuidv4(),
   }
 
   marvelService = new MarvelService()
 
-  handleScroll = () => {
-    const { loadingScroll } = this.state
-    if (loadingScroll) {
-      return
-    }
-    const { innerHeight } = window
-    const { bottom } = this.listRef.getBoundingClientRect()
-    if (bottom <= innerHeight) {
-      this.onRequest(this.offset + 10)
-    }
-  }
+  // handleScroll = () => {
+  //   const { loadingScroll } = this.state
+  //   if (loadingScroll) {
+  //     return
+  //   }
+  //   const { innerHeight } = window
+  //   const { bottom } = this.listRef.getBoundingClientRect()
+  //   if (bottom <= innerHeight) {
+  //     this.onRequest(this.offset + 10)
+  //   }
+  // }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll)
+    // window.addEventListener('scroll', this.handleScroll)
     this.onRequest(this.offset) // N1
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
-  }
+  // componentWillUnmount() {
+  //   window.removeEventListener('scroll', this.handleScroll)
+  // }
 
   onRequest = async (offset) => {
     this.onCharListLoading() // N2
@@ -70,16 +70,16 @@ class CharList extends Component {
     }
     //N 4
     this.setState(({ offset, charList }) => ({
-      loadingScroll: true,
-      //  [ null ]   newItem
+      // loadingScroll: true,
+      //              [ null ]   newItem
       charList: [...charList, ...newCharList],
       loading: false,
 
       newItemLoading: false,
-      offset: offset,
+      offset: offset + 10,
       charEnded: ended, //  ended = true
-      loadingScroll: false,
-      id: uuidv4(),
+      // loadingScroll: false,
+      // id: uuidv4(),
     }))
   }
 
@@ -105,7 +105,7 @@ class CharList extends Component {
       return (
         <li
           className="char__item"
-          ref={(ref) => (this.listRef = ref)}
+          // ref={(ref) => (this.listRef = ref)}
           key={item.id}
           onClick={() => this.props.onCharSelected(item.id)}
         >

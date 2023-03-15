@@ -1,6 +1,8 @@
-.btnModalClose {
-    width: 300px;
-    height: 300px;
-     z-index: 99;
-    position: absolute;
+
+.Wrapper__Model-close {
+    
+    position: fixed;
+    top: 480px;
+    left: 270px;
+    z-index: 6;
 }

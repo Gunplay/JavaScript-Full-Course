@@ -35,7 +35,7 @@ class App extends Component {
             <CharList onCharSelected={this.onCharSelected} />
           </ErrorBoundary>
           {/* state id */}
-          {selectedChar !== null && (
+          {selectedChar && (
             <WrapperModel
               charInfo={selectedChar}
               onClose={() => this.setState({ selectedChar: null })}

@@ -189,9 +189,29 @@ const WrapperForButton = (props, backgroundColor) => {
   )
 }
 
+const ReUsebleComp = (props) => {
+  return <div style={{ color: 'orange' }}>{props.children}</div>
+}
+const HelloGreating = (props, backgroundColor) => {
+  console.log(backgroundColor)
+  return (
+    <div style={{ backgroundColor }}>
+      <ReUsebleComp />
+    </div>
+  )
+}
+
 function App() {
   return (
     <Wrapper>
+      <HelloGreating backgroundColor="black" />
+
+      <ReUsebleComp>
+        <h2>Hello 1</h2>
+        <h2>Hello 2</h2>
+        <h2>Hello 3</h2>
+        <h2>Hello 4</h2>
+      </ReUsebleComp>
       <WrapperForButton backgroundColor="red">
         <button>One</button>
         <button>Two</button>
