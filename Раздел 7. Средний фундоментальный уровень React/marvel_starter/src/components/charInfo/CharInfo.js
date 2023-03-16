@@ -8,16 +8,16 @@ import './charInfo.scss'
 // import thor from '../../resources/img/thor.jpeg'
 
 class CharInfo extends Component {
+  constructor(props) {
+    super(props)
+  }
   state = {
     char: null, // {} === true
     loading: false, // В компоненте инфо пресонажа, должна быть загрузка только по действию клика клиента
     error: false,
+    isModalOpen: false,
   }
   marvelService = new MarvelService()
-
-  componentDidMount() {
-    this.updateChar()
-  }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.charId !== prevProps.charId) {
@@ -62,26 +62,65 @@ class CharInfo extends Component {
     })
   }
 
-  render() {
-    const { char, loading, error } = this.state
+  componentDidMount() {
+    this.updateChar()
+    document.addEventListener('mousedown', this.handleClickOutside)
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideClick)
+  }
 
+  handleClickOutside = (event) => {
+    if (
+      this.modalRef &&
+      !this.modalRef.contains(event.target) &&
+      this.state.isModalOpen
+    ) {
+      this.setState({ isModalOpen: false })
+    }
+  }
+  handleMouseEnter = () => {
+    this.setState({
+      isModalOpen: true,
+    })
+  }
+
+  handleMouseLeave = () => {
+    this.setState({
+      isModalOpen: false,
+    })
+  }
+  render() {
+    const { char, loading, error, isModalOpen } = this.state
+
+    console.log(isModalOpen)
+    // const { onMouseEnter, onMouseLeave } = this.props
     const skeleton = char || loading || error ? null : <Skeleton />
     const errorMessage = error ? <ErrorMessage /> : null
     const spinner = loading ? <Spinner /> : null
     const content = !(loading || error || !char) ? <View char={char} /> : null
-
+    const charInfoOvelay = 'char__info-overlay'
     return (
-      <>
-        <div>
-          <div className="char__info">
-            {skeleton}
-            {errorMessage}
-            {spinner}
-            {content}
+      <div
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
+      >
+        <div class={charInfoOvelay}>
+          <div>
+            {isModalOpen && (
+              <div
+                ref={(node) => (this.modalRef = node)}
+                className="char__info"
+              >
+                {skeleton}
+                {errorMessage}
+                {spinner}
+                {content}
+              </div>
+            )}
           </div>
         </div>
-        <div class="char__info-overlay"></div>
-      </>
+      </div>
     )
   }
 }

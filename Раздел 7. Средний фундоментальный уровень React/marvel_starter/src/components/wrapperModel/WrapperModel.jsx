@@ -23,13 +23,13 @@ class WrapperModel extends Component {
     super(props)
   }
   render() {
-    const { charInfo, onClose,  } = this.props;
-
+    const { charInfo, onBtnClose,  } = this.props;
+    console.log(onBtnClose)
     return (
       <>
         {charInfo && (
           <div className="Wrapper__Model">
-          <ButtonCLose type="button" onClick={onClose}>BACK</ButtonCLose>
+          <ButtonCLose type="button" onClick={onBtnClose}>BACK</ButtonCLose>
             {this.props.children}
           </div>
         )}

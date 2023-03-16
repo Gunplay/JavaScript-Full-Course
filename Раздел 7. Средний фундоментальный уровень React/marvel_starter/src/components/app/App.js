@@ -19,9 +19,16 @@ class App extends Component {
     })
   }
 
-  render() {
-    const { selectedChar } = this.state
+  onClose = (e) => {
+    console.log(e.target)
+    // Добавьте здесь логику, которая будет выполняться при нажатии на клавишу Esc
 
+    this.setState({ selectedChar: null })
+  }
+
+  render() {
+    const { selectedChar, isModalOpen } = this.state
+    console.log(isModalOpen)
     return (
       <div className="app">
         <AppHeader />
@@ -38,7 +45,8 @@ class App extends Component {
           {selectedChar && (
             <WrapperModel
               charInfo={selectedChar}
-              onClose={() => this.setState({ selectedChar: null })}
+              onBtnClose={this.onClose}
+              // onClose={() => this.setState({ selectedChar: null })}
             >
               <CharInfo charId={selectedChar} />
             </WrapperModel>

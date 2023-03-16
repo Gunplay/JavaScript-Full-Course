@@ -89,6 +89,7 @@ class CharList extends Component {
       loading: false,
     })
   }
+
   itemRefs = []
 
   setRef = (ref) => {
@@ -103,9 +104,9 @@ class CharList extends Component {
     // и не факт, что мы выиграем по оптимизации за счет бОльшего кол-ва элементов
 
     // По возможности, не злоупотребляйте рефами, только в крайних случаях
-    this.itemRefs.forEach((item) =>
+    this.itemRefs.forEach((item) => {
       item.classList.remove('char__item_selected')
-    )
+    })
     this.itemRefs[id].classList.add('char__item_selected')
     this.itemRefs[id].focus()
   }
