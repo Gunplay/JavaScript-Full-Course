@@ -35,8 +35,9 @@ class CharList extends Component {
   // }
 
   componentDidMount() {
+    // console.log('offset:', this.state.offset)
     // window.addEventListener('scroll', this.handleScroll)
-    this.onRequest(this.offset) // N1
+    this.onRequest(this.state.offset) // N1
   }
 
   // componentWillUnmount() {
@@ -48,6 +49,7 @@ class CharList extends Component {
     try {
       const response = await this.marvelService.getAllCharacters(offset) //N3 newState
       this.onCharListLoaded(response)
+
       console.log('res:', response)
     } catch (err) {
       this.onError(err)
@@ -62,21 +64,22 @@ class CharList extends Component {
     })
   }
 
-  onCharListLoaded = (newCharList) => {
-    console.log(newCharList)
+  onCharListLoaded = (response) => {
+    console.log(response.data)
     let ended = false
-    if (newCharList?.length < 10) {
+    if (response.data?.length < 10) {
       ended = true
     }
     //N 4
     this.setState(({ offset, charList }) => ({
+      // ASYNC TASK
       // loadingScroll: true,
       //              [ null ]   newItem
-      charList: [...charList, ...newCharList],
+      charList: [...charList, ...response.data],
       loading: false,
 
       newItemLoading: false,
-      offset: offset + 10,
+      offset: response.offset,
       charEnded: ended, //  ended = true
       // loadingScroll: false,
       // id: uuidv4(),
@@ -111,6 +114,15 @@ class CharList extends Component {
     this.itemRefs[id].focus()
   }
 
+  handleLoadMore = () => {
+    this.setState({ ...this.state, offset: this.state.offset + 10 }, () =>
+      // function ASYNC
+      console.log('this state offset: 220', this.state.offset)
+    )
+    console.log('this state offset:', this.state.offset) //210
+    // this.setState(() => console.log('3'))
+    // this.onRequest(this.state.offset + 10)
+  }
   // Этот метод создан для оптимизации,
   // чтобы не помещать такую конструкцию в метод render
   renderItems(arr) {
@@ -169,7 +181,7 @@ class CharList extends Component {
           className="button button__main button__long"
           disabled={newItemLoading}
           style={{ display: charEnded ? 'none' : 'block' }}
-          onClick={() => this.onRequest(offset)}
+          onClick={this.handleLoadMore}
         >
           <div className="inner">load more</div>
         </button>
