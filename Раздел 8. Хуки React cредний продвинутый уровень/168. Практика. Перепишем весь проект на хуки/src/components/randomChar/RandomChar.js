@@ -1,101 +1,74 @@
-import { Component } from 'react/cjs/react.production.min'
+import { useState, useEffect } from 'react'
 import Spinner from '../spinner/Spinner'
 import ErrorMessage from '../errorMessage/ErrorMessage'
 import MarvelService from '../../services/MarvelService'
+
 import './randomChar.scss'
-// import thor from '../../resources/img/thor.jpeg'
 import mjolnir from '../../resources/img/mjolnir.png'
 
-class RandomChar extends Component {
-  constructor(props) {
-    super(props)
-    //this.updateChar() // Конструируем так чтобы получали данные сразу, то есть вызов идёт сразу - до нашей верстки, это плохая практика
-    // console.log('constructor')
-  }
-  // class Field
-  state = {
-    char: {},
-    loading: true,
-    error: false,
-  }
-  marvelService = new MarvelService()
+const RandomChar = () => {
+  const [char, setChar] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
-  componentDidMount() {
-    // this.foo.bar = 0
-    this.updateChar()
-    // this.timerId = setInterval(this.updateChar, 3000)
-    // console.log('mount')
-  }
+  const marvelService = new MarvelService()
 
-  componentWillUnmount() {
-    clearInterval(this.timerId)
-    // console.log('unmount')
-  }
-  onCharLoaded = (char) => {
-    this.setState({ char: char, loading: false }) // write new object or char
+  useEffect(() => {
+    updateChar()
+    const timerId = setInterval(updateChar, 3000)
+
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [])
+
+  const onCharLoaded = (char) => {
+    setLoading(false)
+    setChar(char)
   }
 
-  onError = () => {
-    this.setState({
-      loading: false, // no loaddin, if got error
-      error: true,
-    })
+  const onCharLoading = () => {
+    setLoading(true)
   }
 
-  onCharLoading = () => {
-    this.setState({
-      loading: true,
-    })
+  const onError = () => {
+    setError(true)
+    setLoading(false)
   }
 
-  updateChar = () => {
-    // console.log('update')
-    //                                      max     min - diapozon + min
-    const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
-    // this.marvelService.getAllCharacters().then((res) => console.log(res))
-    this.onCharLoading()
-    this.marvelService
-      .getCharactersById(id)
-      .then(this.onCharLoaded) // return object RES with character
-      .catch(this.onError)
+  const updateChar = () => {
+    const id = Math.floor(Math.random() * (1011400 - 1011000)) + 1011000
+    onCharLoading()
+    marvelService.getCharactersById(id).then(onCharLoaded).catch(onError)
   }
-  render() {
-    // console.log('render')
-    // const { updateChar } = this.props
-    const { char, loading, error } = this.state
-    const errorMessage = error ? <ErrorMessage /> : null
-    const spinner = loading ? <Spinner /> : null
-    const content = !(loading || error) ? <View char={char} /> : null
-    // Условный рендеринг
-    // if (loading) {
-    //   return <Spinner />
-    // }
 
-    return (
-      <div className="randomchar">
-        {/* {loading ? <Spinner /> : <View char={char} />} */}
-        {errorMessage}
-        {spinner}
-        {content}
-        <div className="randomchar__static">
-          <p className="randomchar__title">
-            Random character for today!
-            <br />
-            Do you want to get to know him better?
-          </p>
-          <p className="randomchar__title">Or choose another one</p>
-          <button onClick={this.updateChar} className="button button__main">
-            <div className="inner">try it</div>
-          </button>
-          <img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
-        </div>
+  const errorMessage = error ? <ErrorMessage /> : null
+  const spinner = loading ? <Spinner /> : null
+  const content = !(loading || error || !char) ? <View char={char} /> : null
+
+  return (
+    <div className="randomchar">
+      {errorMessage}
+      {spinner}
+      {content}
+      <div className="randomchar__static">
+        <p className="randomchar__title">
+          Random character for today!
+          <br />
+          Do you want to get to know him better?
+        </p>
+        <p className="randomchar__title">Or choose another one</p>
+        <button onClick={updateChar} className="button button__main">
+          <div className="inner">try it</div>
+        </button>
+        <img src={mjolnir} alt="mjolnir" className="randomchar__decoration" />
       </div>
-    )
-  }
+    </div>
+  )
 }
+
 const View = ({ char }) => {
   const { name, description, thumbnail, homepage, wiki } = char
-
   let imgStyle = { objectFit: 'cover' }
   if (
     thumbnail ===
@@ -127,4 +100,5 @@ const View = ({ char }) => {
     </div>
   )
 }
+
 export default RandomChar

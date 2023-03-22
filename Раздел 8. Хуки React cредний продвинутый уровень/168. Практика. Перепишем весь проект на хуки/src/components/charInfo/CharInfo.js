@@ -1,4 +1,4 @@
-import { Component } from 'react/cjs/react.production.min'
+import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import MarvelService from '../../services/MarvelService'
 import Spinner from '../spinner/Spinner'
@@ -7,122 +7,72 @@ import Skeleton from '../skeleton/Skeleton'
 import './charInfo.scss'
 // import thor from '../../resources/img/thor.jpeg'
 
-class CharInfo extends Component {
-  constructor(props) {
-    super(props)
-  }
-  state = {
-    char: null, // {} === true
-    loading: false, // В компоненте инфо пресонажа, должна быть загрузка только по действию клика клиента
-    error: false,
-    isModalOpen: false,
-  }
-  marvelService = new MarvelService()
+const CharInfo = ({ charId }) => {
+  const [char, setChar] = useState(null) // {} === true
+  const [loading, setLoading] = useState(false) // В компоненте инфо пресонажа, должна быть загрузка только по действию клика клиента
+  const [error, setError] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const marvelService = new MarvelService()
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.charId !== prevProps.charId) {
-      this.updateChar()
+  useEffect(() => {
+    const updateChar = async () => {
+      if (!charId) {
+        return
+      }
+      setLoading(true)
+      setError(false)
+
+      try {
+        const char = await marvelService.getCharactersById(charId)
+        setChar(char)
+      } catch (error) {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
     }
-  }
+    updateChar()
+    setIsModalOpen(true)
+  }, [charId])
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.props.charId !== prevProps.charId) {
+  //     this.updateChar()
+  //   }
+  // }
 
   // componentDidCatch(err, info) {
   //   console.log(err, info)
   //   this.setState({ error: true })
   // }
 
-  updateChar = () => {
-    const { charId } = this.props
-    if (!charId) {
-      return
-    }
-    this.onCharLoading() // spinner
+  // onCharLoaded = (char) => {
+  //   this.setState({ char: char, loading: false }) // write new object or char
+  // }
 
-    this.marvelService
-      .getCharactersById(charId)
-      .then(this.onCharLoaded)
-      .catch(this.onError)
-
-    // this.foo.bar = 0 // catch error
-  }
-
-  onCharLoaded = (char) => {
-    this.setState({ char: char, loading: false }) // write new object or char
-  }
-
-  onError = () => {
-    this.setState({
-      loading: false, // no loaddin, if got error
-      error: true,
-    })
-  }
-
-  onCharLoading = () => {
-    this.setState({
-      loading: true,
-    })
-  }
-  handleClickOutside = (event) => {
-    if (
-      this.modalRef &&
-      !this.modalRef.contains(event.target) &&
-      this.state.isModalOpen
-    ) {
-      this.setState({ isModalOpen: false })
-    }
-  }
-
-  componentDidMount() {
-    this.updateChar()
-    document.addEventListener('mousedown', this.handleClickOutside)
-  }
-  componentWillUnmount() {
-    document.removeEventListener('click', this.handleOutsideClick)
-  }
-
-  handleMouseEnter = () => {
-    this.setState({
-      isModalOpen: true,
-    })
-  }
-
-  handleMouseLeave = () => {
-    this.setState({
-      isModalOpen: false,
-    })
-  }
-  render() {
-    const { char, loading, error, isModalOpen } = this.state
-
-    console.log(isModalOpen)
-    // const { onMouseEnter, onMouseLeave } = this.props
-    const skeleton = char || loading || error ? null : <Skeleton />
-    const errorMessage = error ? <ErrorMessage /> : null
-    const spinner = loading ? <Spinner /> : null
-    const content = !(loading || error || !char) ? <View char={char} /> : null
-    const charInfoOvelay = 'char__info-overlay'
-    return (
-      <div
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <div class={charInfoOvelay}>
-          <div>
-            {isModalOpen && (
-              <div
-                ref={(node) => (this.modalRef = node)}
-                className="char__info"
-              >
-                {skeleton}
-                {errorMessage}
-                {spinner}
-                {content}
-              </div>
-            )}
-          </div>
+  console.log(isModalOpen)
+  // const { onMouseEnter, onMouseLeave } = this.props
+  const skeleton = char || loading || error ? null : <Skeleton />
+  const errorMessage = error ? <ErrorMessage /> : null
+  const spinner = loading ? <Spinner /> : null
+  const content = !(loading || error || !char) ? <View char={char} /> : null
+  const charInfoOvelay = 'char__info-overlay'
+  return (
+    <div>
+      <div class={charInfoOvelay}>
+        <div>
+          {isModalOpen && (
+            <div className="char__info">
+              {skeleton}
+              {errorMessage}
+              {spinner}
+              {content}
+            </div>
+          )}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 const View = ({ char }) => {
