@@ -1,48 +1,52 @@
 import { useState, useEffect } from 'react'
 import Spinner from '../spinner/Spinner'
 import ErrorMessage from '../errorMessage/ErrorMessage'
-import MarvelService from '../../services/MarvelService'
+import useMarvelService from '../../services/MarvelService'
 
 import './randomChar.scss'
 import mjolnir from '../../resources/img/mjolnir.png'
 
 const RandomChar = () => {
   const [char, setChar] = useState(null)
-  const [error, setError] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const marvelServise = new MarvelService()
+  // const [error, setError] = useState(false)
+  // const [loading, setLoading] = useState(true)
+
+  const { loading, error, getCharactersById, clearError } = useMarvelService()
 
   useEffect(() => {
+    // onCharLoaded()
     updateChar()
-    onCharLoaded()
-    const timerId = setInterval(updateChar, 4000)
+
+    const timerId = setInterval(updateChar, 5000)
 
     return () => clearInterval(timerId)
   }, [])
 
-  const onCharLoaded = () => {
-    setLoading(false)
-    setChar(char)
-  }
-  const onError = () => {
-    setError(true)
-  }
+  // const onCharLoaded = () => {
+  //   setChar(char)
+  // }
+  // const onError = () => {
+  //   setError(true)
+  // }
 
-  const onCharLoading = () => {
-    setLoading(false)
-  }
+  // const onCharLoading = (double) => {
+  //   setLoading(double)
+  // }
 
   const updateChar = async () => {
+    clearError()
     console.log(char)
+    // onCharLoading(true)
+
     try {
       const id = Math.floor(Math.random() * (1011400 - 1011000)) + 1011000
 
-      const char = await marvelServise.getCharactersById(id)
+      const char = await getCharactersById(id)
+      // onCharLoaded()
       setChar(char)
+      // onCharLoading(false)
     } catch (error) {
-      onError()
-    } finally {
-      onCharLoading()
+      // onError()
     }
   }
   const errorMessage = error ? <ErrorMessage /> : null
