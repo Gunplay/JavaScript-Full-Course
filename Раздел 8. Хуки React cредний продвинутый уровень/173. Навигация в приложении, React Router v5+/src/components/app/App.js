@@ -15,12 +15,13 @@ const App = () => {
           <Switch>
             {/* либо корневой компонент ставить на последнее место */}
             {/* Полное совпадение пути exact - 2*/}
-            <Route exact path="/">
-              <MainPage />
-            </Route>
-
             <Route exact path="/comics">
               <ComicsPage />
+            </Route>
+            {/* Moved route / to the end in order main page was default and deleted
+            exact !!!!!!!*/}
+            <Route path="/">
+              <MainPage />
             </Route>
           </Switch>
         </main>
