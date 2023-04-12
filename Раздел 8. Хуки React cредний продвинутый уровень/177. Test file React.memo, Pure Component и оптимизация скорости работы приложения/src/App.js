@@ -94,7 +94,7 @@ const Form = memo((props) => {
 
 function App() {
   const [data, setData] = useState({
-    mail: 'name@example.com!',
+    mail: 'name@example.com',
     text: 'some text',
   })
 
@@ -114,7 +114,7 @@ function App() {
       <button
         onClick={() =>
           setData({
-            mail: 'name@example.com!',
+            mail: 'name@example.com',
             text: 'some text',
           })
         }

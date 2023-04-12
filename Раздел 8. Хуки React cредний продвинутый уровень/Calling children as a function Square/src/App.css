@@ -1,0 +1,7 @@
+.App {
+  text-align: center;
+}
+.parent__square {
+  display: flex;
+  justify-content: center;
+}
