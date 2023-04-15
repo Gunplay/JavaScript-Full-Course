@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import Spinner from '../spinner/Spinner'
 import ErrorMessage from '../errorMessage/ErrorMessage'
@@ -19,7 +20,6 @@ const CharList = (props) => {
   const { loading, error, getAllCharacters } = useMarvelService()
   // useEffect запускается после рендера, то есть когда функция существует внутри нашегго компонента
   useEffect(() => {
-    console.log('useEffect')
     onRequest(offset, true)
   }, []) // Когда массив пустой - функ вып один раз
 
@@ -29,6 +29,7 @@ const CharList = (props) => {
     // setNewItemLoading(true) // N2
     try {
       const response = await getAllCharacters(offset) //N3 newState
+      console.log(response)
       onCharListLoaded(response)
     } catch (err) {
       // onError(err)
@@ -117,8 +118,10 @@ const CharList = (props) => {
             }
           }}
         >
-          <img src={item.thumbnail} alt={item.name} style={imgStyle} />
-          <div className="char__name">{item.name}</div>
+          <Link to={`/characters/${item.id}`}>
+            <img src={item.thumbnail} alt={item.name} style={imgStyle} />
+            <div className="char__name">{item.name}</div>
+          </Link>
         </li>
       )
     })

@@ -22,6 +22,7 @@ const useMarvelService = () => {
     const res = await request(
       `${_apiBase}characters?limit=10&offset=${offset}&${_apiKey}`
     )
+    console.log('res', res)
     return {
       data: res.data.results.map(_transformCharacter),
       offset: res.data.offset,
@@ -56,6 +57,7 @@ const useMarvelService = () => {
   }
 
   const _transformCharacter = (char) => {
+    console.log('_transformCharacter', char)
     return {
       id: char.id,
       name: char.name,

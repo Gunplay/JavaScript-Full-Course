@@ -10,7 +10,7 @@ import './charInfo.scss'
 
 const CharInfo = ({ charId }) => {
   const [char, setChar] = useState(null) // {} === true
-
+  console.log('char', char)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { loading, error, getCharactersById } = useMarvelService()
 
@@ -21,6 +21,7 @@ const CharInfo = ({ charId }) => {
       }
       // setError(false)
       const char = await getCharactersById(charId)
+      console.log('char', char)
       setChar(char)
     }
     updateChar()

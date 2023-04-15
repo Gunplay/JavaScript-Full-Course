@@ -14,7 +14,7 @@ class ErrorBoundary extends Component {
   // catch only in the components life style, render, cild Components, constructor
   // 1) no catch inside adEventListener 2) async code 3) inside ypurself no catch errors 4) server render
   componentDidCatch(error, errorInfo) {
-    console.log(error, errorInfo)
+    // console.log(error, errorInfo)
     this.setState({
       error: true,
     })

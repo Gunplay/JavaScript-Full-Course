@@ -12,7 +12,7 @@ const MainPage = () => {
   const [selectedChar, setChar] = useState(null)
 
   useEffect(() => {
-    console.log('useEffect mainPage')
+    // console.log('useEffect mainPage')
   }, [])
 
   const onCharSelected = (id) => {

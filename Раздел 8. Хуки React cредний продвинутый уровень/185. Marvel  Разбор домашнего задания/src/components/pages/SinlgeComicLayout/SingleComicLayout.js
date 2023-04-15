@@ -1,12 +1,12 @@
 import { Link, useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-import useMarvelService from '../../services/MarvelService'
-import ErrorMessage from '../errorMessage/ErrorMessage'
-import Spinner from '../spinner/Spinner'
-import './singleComicPage.scss'
+import useMarvelService from '../../../services/MarvelService'
+import ErrorMessage from '../../errorMessage/ErrorMessage'
+import Spinner from '../../spinner/Spinner'
+import './SingleComicLayout.scss'
 
-const SingleComicPage = () => {
+const SingleComicLayout = () => {
   const { comicId } = useParams() // comicId:('17941') - object
 
   const [comic, setComic] = useState(null)
@@ -45,7 +45,6 @@ const SingleComicPage = () => {
 
 const View = ({ comic }) => {
   const { title, description, pageCount, thumbnail, language, price } = comic
-  console.log(comic)
 
   return (
     <div className="single-comic">
@@ -63,4 +62,4 @@ const View = ({ comic }) => {
     </div>
   )
 }
-export default SingleComicPage
+export default SingleComicLayout

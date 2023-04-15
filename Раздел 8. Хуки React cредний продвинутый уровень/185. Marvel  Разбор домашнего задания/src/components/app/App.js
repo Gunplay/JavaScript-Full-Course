@@ -9,7 +9,13 @@ import Spinner from '../spinner/Spinner'
 const Page404 = lazy(() => import('../pages/404.js'))
 const MainPage = lazy(() => import('../pages/MainPage.js'))
 const ComicsPage = lazy(() => import('../pages/ComicsPage.js'))
-const SingleComicPage = lazy(() => import('../pages/SingleComicPage.js'))
+const CharactersPage = lazy(() => import('../pages/CharactersPage.js'))
+const SingleCharacterLayout = lazy(() =>
+  import('../pages/singleCharacterLayout/SingleCharacterLayout.js')
+)
+const SingleComicLayout = lazy(() =>
+  import('../pages/SinlgeComicLayout/SingleComicLayout.js')
+)
 // import MainPage from '../pages/MainPage'
 // import ComicsPage from '../pages/ComicsPage'
 // 751
@@ -28,12 +34,21 @@ const App = () => {
               <Route exact path="/">
                 <MainPage />
               </Route>
+
+              <Route exact path="/characters">
+                <CharactersPage />
+              </Route>
+
+              <Route exact path="/characters/:charId">
+                <SingleCharacterLayout />
+              </Route>
+
               <Route exact path="/comics">
                 <ComicsPage />
               </Route>
               {/* match it is path 1) params is key = :comicId, value - 232312 */}
               <Route exact path="/comics/:comicId">
-                <SingleComicPage />
+                <SingleComicLayout />
               </Route>
               <Route path="*">
                 <Page404 />
