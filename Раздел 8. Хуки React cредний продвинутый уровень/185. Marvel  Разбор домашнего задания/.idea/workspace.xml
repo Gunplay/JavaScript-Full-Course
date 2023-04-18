@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="92f32f1b-e4f0-4bff-818c-bb9f38c31d08" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Раздел 5. Продвинутый JavaSript/86. Promise (ES6)/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Раздел 5. Продвинутый JavaSript/86. Promise (ES6)/js/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Раздел 5. Продвинутый JavaSript/Макро и микрозадачи/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Раздел 5. Продвинутый JavaSript/Макро и микрозадачи/script.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../158. Render-props паттерн/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../158. Render-props паттерн/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../160. Порталы/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../160. Порталы/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/charInfo/CharInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/charInfo/CharInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/charList/CharList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/charList/CharList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/MarvelService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/MarvelService.js" afterDir="false" />
-    </list>
+    <list default="true" id="92f32f1b-e4f0-4bff-818c-bb9f38c31d08" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,10 +35,23 @@
       <option name="presentableId" value="Default" />
       <updated>1679330995142</updated>
       <workItem from="1679331005696" duration="248000" />
+      <workItem from="1681579102470" duration="28000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/wrapperModel/WrapperModel.jsx</url>
+          <line>15</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -40,7 +40,7 @@ const MainPage = () => {
       <ErrorBoundary>
         <CharList onCharSelected={onCharSelected} />
       </ErrorBoundary>
-      {selectedChar && (
+      {/* {selectedChar && (
         <WrapperModel
           charInfo={selectedChar}
           onBtnClose={onClose}
@@ -48,7 +48,7 @@ const MainPage = () => {
         >
           <CharInfo charId={selectedChar} />
         </WrapperModel>
-      )}
+      )} */}
     </>
   )
 }
