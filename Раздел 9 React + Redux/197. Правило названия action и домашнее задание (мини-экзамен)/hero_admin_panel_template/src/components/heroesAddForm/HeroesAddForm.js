@@ -1,5 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useHttp } from '../../hooks/http.hook'
+import { useDispatch, useSelector } from 'react-redux'
+import { v4 as uiid } from 'uuid'
+
+import { heroCreated } from '../../actions'
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
@@ -11,36 +15,75 @@ import { useHttp } from '../../hooks/http.hook'
 // данных из фильтров
 
 const HeroesAddForm = () => {
+  const [heroName, setHeroName] = useState('')
+  const [heroDescr, setHeroDescr] = useState('')
+  const [heroElement, setHeroElement] = useState('')
+
+  const { filters, filtersLoadingStatus } = useSelector((state) => state)
+  console.log(filters)
+  const dispatch = useDispatch()
   const { request } = useHttp()
 
-  const [textName, setTextName] = useState('')
-  const [textArea, settextArea] = useState('')
-  const [filtres, setFiltres] = useState([])
-  console.log('filtres', filtres)
-  useEffect(() => {
-    async function fetchData() {
-      const response = await request('http://localhost:3001/filters')
-
-      setFiltres(response)
+  const onSubmitHandler = () => {
+    e.preventDefault()
+    const newHero = {
+      id: uiid(),
+      name: heroName,
+      description: heroDescr,
+      element: heroElement,
     }
-    fetchData()
-  }, [])
 
+    request(
+      'http://localhost:3001/heroes',
+      (method = 'POST'),
+      JSON.stringify(newHero)
+    )
+      .then((res) => console.log(res, 'sending successful'))
+      .then(dispatch(heroCreated(newHero)))
+      .catch((err) => console.log(err))
+
+    setHeroName('')
+    setHeroDescr('')
+    setHeroElement('')
+  }
+
+  const renderFilters = (filters, status) => {
+    if (status === 'loading') {
+      return <option>Загрузка элементов</option>
+    } else if (status === 'error') {
+      return <option>Ошибка загрузки</option>
+    }
+
+    // Если фильтры есть, то рендерим их
+    if (filters && filters.length > 0) {
+      return filters.map(({ name, label }) => {
+        // Один из фильтров нам тут не нужен
+        // eslint-disable-next-line
+        if (name === 'all') return
+
+        return (
+          <option key={name} value={name}>
+            {label}
+          </option>
+        )
+      })
+    }
+  }
   return (
-    <form className="border p-4 shadow-lg rounded">
+    <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label fs-4">
           Имя нового героя
         </label>
         <input
           required
-          value={textName}
-          onChange={(e) => setTextName(e.target.value)}
           type="text"
           name="name"
           className="form-control"
           id="name"
           placeholder="Как меня зовут?"
+          value={heroName}
+          onChange={(e) => setHeroName(e.target.value)}
         />
       </div>
 
@@ -50,13 +93,13 @@ const HeroesAddForm = () => {
         </label>
         <textarea
           required
-          value={textArea}
-          onChange={(e) => settextArea(e.target.value)}
           name="text"
           className="form-control"
           id="text"
           placeholder="Что я умею?"
           style={{ height: '130px' }}
+          value={heroDescr}
+          onChange={(e) => setHeroDescr(e.target.value)}
         />
       </div>
 
@@ -64,17 +107,16 @@ const HeroesAddForm = () => {
         <label htmlFor="element" className="form-label">
           Выбрать элемент героя
         </label>
-        <select required className="form-select" id="element" name="element">
-          {filtres.map((filter, index) => (
-            <option value={filter} key={index}>
-              {filter}
-            </option>
-          ))}
-          {/* <option>Я владею элементом...</option>
-          <option value="fire">Огонь</option>
-          <option value="water">Вода</option>
-          <option value="wind">Ветер</option>
-          <option value="earth">Земля</option> */}
+        <select
+          required
+          className="form-select"
+          id="element"
+          name="element"
+          value={heroElement}
+          onChange={(e) => setHeroElement(e.target.value)}
+        >
+          <option value="">Я владею элементом...</option>
+          {renderFilters(filters, filtersLoadingStatus)}
         </select>
       </div>
 
