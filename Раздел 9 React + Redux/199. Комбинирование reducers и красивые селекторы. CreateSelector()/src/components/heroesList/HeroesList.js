@@ -2,6 +2,7 @@ import { useHttp } from '../../hooks/http.hook'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
+import { createSelector } from 'reselect'
 import {
   heroesFetching,
   heroesFetched,
@@ -15,10 +16,33 @@ import Spinner from '../spinner/Spinner'
 // При клике на "крестик" идет удаление персонажа из общего состояния
 // Усложненная задача:
 // Удаление идет и с json файла при помощи метода DELETE
+// npm i reselect --save
+const HeroesList = (props) => {
+  //                            members the values
+  const filteredHeroesSelector = createSelector(
+    (state) => state.filters.activeFilter,
+    (state) => state.heroes.heroes,
+    (filter, heroes) => {
+      if (filter === 'all') {
+        console.log('Render')
+        return heroes
+      } else {
+        return heroes.filter((item) => item.element === filter)
+      }
+    }
+  )
+  const filteredHeroes = useSelector(filteredHeroesSelector)
+  // const filteredHeroes = useSelector((state) => {
+  //   if (state.filters.activeFilter === 'all') {
+  //     return state.heroes.heroes
+  //   } else {
+  //     return state.heroes.heroes.filter(
+  //       (item) => item.element === state.filters.activeFilter
+  //     )
+  //   }
+  // })
+  const heroesLoadingStatus = useSelector((state) => state.heroesLoadingStatus)
 
-const HeroesList = () => {
-  const { heroes, heroesLoadingStatus } = useSelector((state) => state)
-  console.log(heroes)
   const dispatch = useDispatch()
   const { request } = useHttp()
 
@@ -29,7 +53,7 @@ const HeroesList = () => {
       .catch(() => dispatch(heroesFetchingError()))
 
     // eslint-disable-next-line
-  }, [])
+  }, [request])
 
   const onDeleteHero = (id) => {
     request(`http://localhost:3001/heroes/${id}`, 'DELETE')
@@ -62,7 +86,7 @@ const HeroesList = () => {
     })
   }
 
-  const elements = renderHeroesList(heroes)
+  const elements = renderHeroesList(filteredHeroes)
   return (
     <TransitionGroup>
       {elements}

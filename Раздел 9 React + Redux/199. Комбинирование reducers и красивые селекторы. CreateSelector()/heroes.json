@@ -7,21 +7,21 @@
       "element": "wind"
     },
     {
-      "id": "20c93405-1a08-496a-b2d2-eb906c7e8cba",
-      "name": "asdsa",
-      "description": "sadsaadsadasddasdd",
-      "element": "fire"
-    },
-    {
       "id": "fd0592e4-8da2-42af-adfd-e3782867ee95",
       "name": "sadsadsad",
       "description": "sadsadsadad",
       "element": "earth"
     },
     {
-      "id": "bcd65504-61ad-4a57-8981-27261ba4c51e",
-      "name": "efwef",
-      "description": "efsf",
+      "id": "5cd17259-81dd-4e31-913f-b5a7e015e9a2",
+      "name": "Стас 850 ват",
+      "description": "dfdsafdsaf",
+      "element": "water"
+    },
+    {
+      "id": "d9c5ffd6-6a3c-4af4-8988-d9935d52185e",
+      "name": "Стас 850 ват",
+      "description": "asdasddadsada",
       "element": "wind"
     }
   ],
