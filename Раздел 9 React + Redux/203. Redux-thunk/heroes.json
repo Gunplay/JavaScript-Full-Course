@@ -1,0 +1,55 @@
+{
+  "heroes": [
+    {
+      "id": "fd0592e4-8da2-42af-adfd-e3782867ee95",
+      "name": "sadsadsad",
+      "description": "sadsadsadad",
+      "element": "earth"
+    },
+    {
+      "id": "5cd17259-81dd-4e31-913f-b5a7e015e9a2",
+      "name": "Стас 850 ват",
+      "description": "dfdsafdsaf",
+      "element": "water"
+    },
+    {
+      "id": "dfabc147-fa20-411d-b9d5-6f060e04dec0",
+      "name": "edfawef",
+      "description": "asdsdsad",
+      "element": "fire"
+    },
+    {
+      "id": "0f7df6ca-c887-47e6-8019-e74679eb19fe",
+      "name": "Adam",
+      "description": "asdadasdsa",
+      "element": "wind"
+    }
+  ],
+  "filters": [
+    {
+      "name": "all",
+      "label": "Все",
+      "className": "btn-outline-dark"
+    },
+    {
+      "name": "fire",
+      "label": "Огонь",
+      "className": "btn-danger"
+    },
+    {
+      "name": "water",
+      "label": "Вода",
+      "className": "btn-primary"
+    },
+    {
+      "name": "wind",
+      "label": "Ветер",
+      "className": "btn-success"
+    },
+    {
+      "name": "earth",
+      "label": "Земля",
+      "className": "btn-secondary"
+    }
+  ]
+}
