@@ -20,3 +20,4 @@ Functionality includes:
 and there is an option to click on the employee promotion button using the star icon.
 3 Sorting of employees whose salary is more than $1,000, as well as sorting of those employees who have a salary increase, that is, with an asterisk marker.
 4 And a function has been implemented to remove an employee from the application!
+5 There is also a display at the top of the component the total number of employees and those who are at the top!
